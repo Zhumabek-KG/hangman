@@ -3,28 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hangman Game</title>
+    <title>Typing Speed Test</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="game-container">
-        <h1>Hangman Game</h1>
-        <div class="hangman-image">
-            <img id="hangman-img" src="images/hangman-0.png" alt="Hangman">
+        <h1>Typing Speed Test</h1>
+        <div id="text-display">
+            <p>Start typing the text below:</p>
+            <p id="passage">This is a sample passage. Try to type it as fast as you can!</p>
         </div>
-        <div class="word-display">
-            <p id="word"></p>
+        <textarea id="input-field" placeholder="Start typing here..." autofocus></textarea>
+        <div id="stats">
+            <p>Time: <span id="time-left">60</span> seconds</p>
+            <p>Words per minute (WPM): <span id="wpm">0</span></p>
+            <p>Accuracy: <span id="accuracy">0</span>%</p>
         </div>
-        <div class="letters">
-            <p>Guess a letter:</p>
-            <input type="text" id="guess-input" maxlength="1" autofocus>
-            <button id="guess-button">Guess</button>
-        </div>
-        <div class="info">
-            <p>Incorrect guesses left: <span id="guesses-left">6</span></p>
-            <p>Incorrect letters: <span id="incorrect-letters"></span></p>
-        </div>
-        <button id="restart-button" class="hidden">Restart</button>
+        <button id="start-button">Start Test</button>
+        <button id="restart-button" class="hidden">Restart Test</button>
     </div>
     <script src="script.js"></script>
 </body>
