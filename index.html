@@ -7,25 +7,25 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
+    <div class="game-container">
         <h1>Hangman Game</h1>
-        <div id="gameArea">
-            <div class="word" id="wordDisplay">_ _ _ _ _</div>
-            <div class="wrong-guesses">
-                <p>Incorrect guesses:</p>
-                <div id="incorrectGuesses"></div>
-            </div>
-            <div class="attempts">
-                <p>Remaining Attempts: <span id="remainingAttempts">6</span></p>
-            </div>
-            <div class="controls">
-                <input type="text" id="guessInput" maxlength="1" placeholder="Guess a letter" autofocus>
-                <button id="guessButton">Guess</button>
-                <button id="playButton">Play</button>
-            </div>
+        <div class="hangman-image">
+            <img id="hangman-img" src="images/hangman-0.png" alt="Hangman">
         </div>
+        <div class="word-display">
+            <p id="word"></p>
+        </div>
+        <div class="letters">
+            <p>Guess a letter:</p>
+            <input type="text" id="guess-input" maxlength="1" autofocus>
+            <button id="guess-button">Guess</button>
+        </div>
+        <div class="info">
+            <p>Incorrect guesses left: <span id="guesses-left">6</span></p>
+            <p>Incorrect letters: <span id="incorrect-letters"></span></p>
+        </div>
+        <button id="restart-button" class="hidden">Restart</button>
     </div>
-
     <script src="script.js"></script>
 </body>
 </html>
