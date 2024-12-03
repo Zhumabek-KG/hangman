@@ -1,90 +1,74 @@
-// Hangman game logic
-
-const words = ["javascript", "programming", "hangman", "developer", "computer"];
-let selectedWord, guessedWord, incorrectGuesses, maxGuesses, incorrectLetters;
-
-const wordDisplay = document.getElementById('word');
-const guessInput = document.getElementById('guess-input');
-const guessButton = document.getElementById('guess-button');
-const hangmanImg = document.getElementById('hangman-img');
-const guessesLeft = document.getElementById('guesses-left');
-const incorrectLettersDisplay = document.getElementById('incorrect-letters');
-const restartButton = document.getElementById('restart-button');
-
-// Initialize game
-function startGame() {
-    selectedWord = words[Math.floor(Math.random() * words.length)];
-    guessedWord = Array(selectedWord.length).fill('_');
-    incorrectGuesses = 0;
-    maxGuesses = 6;
-    incorrectLetters = [];
-
-    // Update UI
-    wordDisplay.textContent = guessedWord.join(' ');
-    guessesLeft.textContent = maxGuesses;
-    incorrectLettersDisplay.textContent = incorrectLetters.join(', ');
-    hangmanImg.src = `images/hangman-${incorrectGuesses}.png`;
-
-    // Reset input and button
-    guessInput.value = '';
-    guessInput.focus();
-    guessButton.disabled = false;
-    restartButton.classList.add('hidden');
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
 }
 
-// Handle guess
-function handleGuess() {
-    const guess = guessInput.value.toLowerCase();
-    if (guess && !incorrectLetters.includes(guess) && !guessedWord.includes(guess)) {
-        if (selectedWord.includes(guess)) {
-            // Correct guess
-            for (let i = 0; i < selectedWord.length; i++) {
-                if (selectedWord[i] === guess) {
-                    guessedWord[i] = guess;
-                }
-            }
-            wordDisplay.textContent = guessedWord.join(' ');
-        } else {
-            // Incorrect guess
-            incorrectGuesses++;
-            incorrectLetters.push(guess);
-            incorrectLettersDisplay.textContent = incorrectLetters.join(', ');
-            hangmanImg.src = `images/hangman-${incorrectGuesses}.png`;
-            guessesLeft.textContent = maxGuesses - incorrectGuesses;
-        }
-    }
-
-    // Check game over condition
-    if (incorrectGuesses === maxGuesses) {
-        endGame(false);
-    } else if (!guessedWord.includes('_')) {
-        endGame(true);
-    }
-
-    // Reset input
-    guessInput.value = '';
-    guessInput.focus();
+body {
+    background-color: #f3f4f6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
 }
 
-// End the game (win/lose)
-function endGame(isWin) {
-    guessButton.disabled = true;
-    if (isWin) {
-        alert("Congratulations! You've won!");
-    } else {
-        alert(`Game Over! The word was: ${selectedWord}`);
-    }
-    restartButton.classList.remove('hidden');
+.game-container {
+    text-align: center;
+    background-color: white;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    width: 400px;
 }
 
-// Restart the game
-function restartGame() {
-    startGame();
+h1 {
+    color: #4caf50;
+    font-size: 32px;
 }
 
-// Event listeners
-guessButton.addEventListener('click', handleGuess);
-restartButton.addEventListener('click', restartGame);
+.hangman-image img {
+    width: 200px;
+}
 
-// Start the game on load
-startGame();
+.word-display {
+    font-size: 28px;
+    margin-top: 20px;
+    letter-spacing: 5px;
+}
+
+.letters input {
+    font-size: 20px;
+    padding: 5px 10px;
+    width: 40px;
+    text-align: center;
+}
+
+.letters button {
+    padding: 8px 15px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-left: 10px;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+
+.letters button:hover {
+    background-color: #45a049;
+}
+
+.info {
+    margin-top: 20px;
+    font-size: 16px;
+}
+
+.hidden {
+    display: none;
+}
+
+button:disabled {
+    background-color: gray;
+    cursor: not-allowed;
+}
